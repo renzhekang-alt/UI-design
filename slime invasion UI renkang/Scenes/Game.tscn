@@ -1,0 +1,318 @@
+[gd_scene format=3 uid="uid://duru8g8s6870p"]
+
+[ext_resource type="Texture2D" uid="uid://cmro4ext1mkke" path="res://AssetBundle/Sprites/ForestBackground.png" id="1_6b728"]
+[ext_resource type="Script" uid="uid://2swcahwhlwji" path="res://Scripts/GameManager.gd" id="1_u47yq"]
+[ext_resource type="PackedScene" uid="uid://buf4ij2be0nrc" path="res://Scenes/Player.tscn" id="2_pddb1"]
+[ext_resource type="PackedScene" uid="uid://c4ywvh837ck13" path="res://Scenes/Slime.tscn" id="3_acmq7"]
+[ext_resource type="FontFile" uid="uid://bvyjj5oaoxgr3" path="res://AssetBundle/Uranus_Pixel_11Px.ttf" id="5_cdq3r"]
+[ext_resource type="Texture2D" uid="uid://bs4hl0l6kwef2" path="res://AssetBundle/Sprites/victory.png" id="6_7lihs"]
+[ext_resource type="Texture2D" uid="uid://ccqnq2xkd4pcx" path="res://AssetBundle/Sprites/gameover.png" id="7_fgofq"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uugnx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eq4v1"]
+size = Vector2(39, 438)
+
+[sub_resource type="FontVariation" id="FontVariation_b2bpf"]
+
+[node name="Node2D" type="Node2D" unique_id=1190758164 node_paths=PackedStringArray("spawn_timer", "score_label", "game_over_label")]
+y_sort_enabled = true
+script = ExtResource("1_u47yq")
+slime_scene = ExtResource("3_acmq7")
+spawn_timer = NodePath("Timer")
+score_label = NodePath("CanvasLayer/Label")
+game_over_label = NodePath("CanvasLayer/Game Over Label")
+
+[node name="Background 1" type="Sprite2D" parent="." unique_id=35992215]
+position = Vector2(-120, 0)
+texture = ExtResource("1_6b728")
+
+[node name="Background 2" type="Sprite2D" parent="." unique_id=1575965380]
+position = Vector2(120, 0)
+texture = ExtResource("1_6b728")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=418842304]
+zoom = Vector2(2.425, 2.425)
+
+[node name="Player" parent="." unique_id=342248514 instance=ExtResource("2_pddb1")]
+position = Vector2(-197, 84)
+
+[node name="Boundary" type="Node2D" parent="." unique_id=1309521500]
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Boundary" unique_id=956899985]
+position = Vector2(0, 125.83)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D" unique_id=361172685]
+shape = SubResource("WorldBoundaryShape2D_uugnx")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Boundary" unique_id=1748601412]
+position = Vector2(-235, 62)
+rotation = 1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D2" unique_id=487165666]
+shape = SubResource("WorldBoundaryShape2D_uugnx")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Boundary" unique_id=756673387]
+position = Vector2(234, 62)
+rotation = -1.57079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D3" unique_id=801964618]
+shape = SubResource("WorldBoundaryShape2D_uugnx")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Boundary" unique_id=1221347799]
+position = Vector2(0, 36)
+rotation = -3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D4" unique_id=1606736294]
+shape = SubResource("WorldBoundaryShape2D_uugnx")
+
+[node name="VillageLine" type="Area2D" parent="Boundary" unique_id=475875434]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/VillageLine" unique_id=599339724]
+position = Vector2(-257.5, -11)
+shape = SubResource("RectangleShape2D_eq4v1")
+
+[node name="Timer" type="Timer" parent="." unique_id=379319844]
+wait_time = 3.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=570248694]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=480785394]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 166.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource("5_cdq3r")
+theme_override_font_sizes/font_size = 48
+text = "Score: 0"
+
+[node name="Game Over Label" type="Label" parent="CanvasLayer" unique_id=1920955125]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -317.0
+offset_top = -77.0
+offset_right = 317.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.362376, 0.545068, 0.245238, 1)
+theme_override_constants/outline_size = 60
+theme_override_fonts/font = ExtResource("5_cdq3r")
+theme_override_font_sizes/font_size = 120
+text = "GAME OVER!"
+horizontal_alignment = 1
+
+[node name="Game Over Label2" type="Label" parent="CanvasLayer/Game Over Label" unique_id=1842157506]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -317.0
+offset_top = 60.0
+offset_right = 317.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.362376, 0.545068, 0.245238, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("5_cdq3r")
+theme_override_font_sizes/font_size = 48
+text = "Game By RENKANG"
+horizontal_alignment = 1
+
+[node name="startscreen" type="ColorRect" parent="CanvasLayer" unique_id=1619259445]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -2.0
+offset_right = 7.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="gamename" type="Label" parent="CanvasLayer/startscreen" unique_id=1345160958]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.5
+offset_top = 93.0
+offset_right = 97.5
+offset_bottom = 155.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.035656583, 0.4745596, 0.17670661, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_b2bpf")
+theme_override_font_sizes/font_size = 39
+text = "SLIME INVASION 🦊"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="story" type="Label" parent="CanvasLayer/startscreen" unique_id=1497237188]
+layout_mode = 0
+offset_left = 298.0
+offset_top = 235.0
+offset_right = 903.0
+offset_bottom = 442.0
+theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
+theme_override_font_sizes/font_size = 28
+text = "The forest village is under attack!
+Stop the 100 slimes before they reach the village.
+
+Move: W A S D 
+Shoot: Space / Left Mouse Button"
+
+[node name="Button" type="Button" parent="CanvasLayer/startscreen" unique_id=2130071431]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 518.0
+offset_right = 614.0
+offset_bottom = 585.0
+theme_override_colors/font_color = Color(0.9665502, 0.83989847, 0.8416119, 1)
+theme_override_font_sizes/font_size = 25
+text = "START"
+
+[node name="Victory" type="TextureRect" parent="CanvasLayer" unique_id=1359967755]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.000046
+offset_top = -3.0000153
+offset_right = 522.0
+offset_bottom = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_7lihs")
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/Victory" unique_id=657591798]
+layout_mode = 0
+offset_left = 742.85724
+offset_top = 555.71436
+offset_right = 922.8573
+offset_bottom = 641.4287
+theme_override_colors/font_color = Color(0.5023223, 0.9999998, 0.6196517, 1)
+theme_override_font_sizes/font_size = 24
+text = "START AGAIN"
+
+[node name="VillageGameOver" type="TextureRect" parent="CanvasLayer" unique_id=2073106092]
+offset_left = -4.999998
+offset_top = -8.999939
+offset_right = 1667.0
+offset_bottom = 931.00006
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_fgofq")
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/VillageGameOver" unique_id=366665804]
+layout_mode = 0
+offset_left = 711.4286
+offset_top = 802.85706
+offset_right = 891.42865
+offset_bottom = 888.5714
+theme_override_colors/font_color = Color(0.5023223, 0.9999998, 0.6196517, 1)
+theme_override_font_sizes/font_size = 24
+text = "START AGAIN"
+
+[node name="QuestLog" type="PanelContainer" parent="CanvasLayer" unique_id=1006731062]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -360.0
+offset_bottom = 104.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/QuestLog" unique_id=1274247911]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/QuestLog/MarginContainer" unique_id=1756675734]
+layout_mode = 2
+
+[node name="QuestTitle" type="Label" parent="CanvasLayer/QuestLog/MarginContainer/VBoxContainer" unique_id=877441391]
+layout_mode = 2
+text = "QUEST LOG"
+
+[node name="QuestName" type="Label" parent="CanvasLayer/QuestLog/MarginContainer/VBoxContainer" unique_id=85007163]
+layout_mode = 2
+text = "Main Quest: Save the Village"
+
+[node name="QuestDescription" type="Label" parent="CanvasLayer/QuestLog/MarginContainer/VBoxContainer" unique_id=425178603]
+layout_mode = 2
+text = "Protect the forest village from invading slimes!"
+
+[node name="QuestObjective" type="Label" parent="CanvasLayer/QuestLog/MarginContainer/VBoxContainer" unique_id=1930505557]
+layout_mode = 2
+text = "Defeat 100 slimes. Keep the village safe.
+
+Press Q to hide this log.
+Press ESC to pause."
+
+[node name="PauseMenu" type="PanelContainer" parent="CanvasLayer" unique_id=1974939679]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(300, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -46.5
+offset_right = 37.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PauseMenu" unique_id=1704761370]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer" unique_id=1383809664]
+layout_mode = 2
+
+[node name="PauseTitle" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1564256981]
+layout_mode = 2
+text = "PAUSED"
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=139383010]
+layout_mode = 2
+text = "RESUME"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer" unique_id=1148800649]
+layout_mode = 2
+text = "RESTART"
+
+[node name="Notification" type="PanelContainer" parent="CanvasLayer" unique_id=1934417874]
+visible = false
+custom_minimum_size = Vector2(320, 60)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_right = 160.0
+offset_bottom = 60.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Notification" unique_id=1766489234]
+layout_mode = 2
+
+[node name="NotificationText" type="Label" parent="CanvasLayer/Notification/MarginContainer" unique_id=1021462195]
+layout_mode = 2
+text = "25 Slimes Defeated!"
+horizontal_alignment = 1
+
+[connection signal="area_shape_entered" from="Boundary/VillageLine" to="." method="_on_village_line_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_spawn_slime"]
+[connection signal="pressed" from="CanvasLayer/startscreen/Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Victory/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VillageGameOver/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
